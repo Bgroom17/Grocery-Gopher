@@ -1,3 +1,10 @@
+//questions:
+//total button
+//reset
+//github
+
+
+
 /*eslint-env browser*/
 //This is the Model, code that deals with the data
 
@@ -12,8 +19,13 @@ function getGroceryList() {
         var length = groceryList.length;
         for (var i = 0; i < length; i++) {
             createStoredList(groceryList[i]);
+            
         }
+        
+        totalPrice();
     };
+    
+    
 
 }
 
@@ -23,11 +35,12 @@ window.addEventListener('load', getGroceryList)
 
 
 function totalPrice() {
-    var length = groceryList.length;
+    const length = groceryList.length;
+    let total = 0;
     for (var i = 0; i < length; i++) {
-        total += groceryList[2];
+        total += parseFloat(groceryList[i].price);
         var storedPrice = "<li>" + total + "</li>";
-        document.getElementById('totalListPrice').innerHTML += showTotal;
+        document.getElementById('totalListPrice').innerHTML = total;
     }
 }
 
@@ -54,21 +67,30 @@ function createStoredList(groceryItem) {
 function createList() {
 
     console.log()
+    
+    var itemDes = document.getElementById('itemD');
+    var itemQ = document.getElementById('quantity');
+    var itemP = document.getElementById('price');
+    
+    if(itemDes.value != ''){//all three var
+       
+       
 
     //add item
-    var itemDes = document.getElementById('itemD').value;
-    var desLi = "<li>" + itemDes + "</li>";
+    
+    var desLi = "<li>" + itemDes.value + "</li>";
     document.getElementById('itemDescriptionList').innerHTML += desLi;
 
     //add quantity
-    var itemQ = document.getElementById('quantity').value;
-    var quantityLi = "<li>" + itemQ + "</li>";
+    
+    var quantityLi = "<li>" + itemQ.value + "</li>";
     document.getElementById('itemQuantityList').innerHTML += quantityLi;
 
     //add price
-    var itemP = document.getElementById('price').value;
-    var priceLi = "<li>" + itemP + "</li>";
+    
+    var priceLi = "<li>" + itemP.value + "</li>";
     document.getElementById('itemPriceList').innerHTML += priceLi;
+
 
 
 
@@ -78,16 +100,36 @@ function createList() {
         quantity: itemQ,
         price: itemP
     }
+    
+     console.log(newItem);
 
     groceryList.push(newItem);
+    
+    
+    
 
     //adding the array to local storage
     window.localStorage.setItem('GroceryList', JSON.stringify(groceryList));
-    JSON.parse(window.localStorage.getItem('GroceryList'))
+    
+    
+  itemDes.value = '';
 
-    console.log(newItem);
+    
+}
+
+else{
+    //tell themthat its not working - error messageanddo nothing
+}
+   
 }
 
 document.getElementById('addNew').addEventListener('touchend', function () {
     createList();
+    totalPrice();
 })
+
+
+
+
+
+
