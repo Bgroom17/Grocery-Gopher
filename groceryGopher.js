@@ -8,7 +8,7 @@ function getGroceryList() {
     if (getList != null) {
 
         groceryList = getList;
-console.log(groceryList)
+        console.log(groceryList)
         var length = groceryList.length;
         for (var i = 0; i < length; i++) {
             createStoredList(groceryList[i]);
@@ -22,27 +22,37 @@ console.log(groceryList)
 window.addEventListener('load', getGroceryList)
 
 
+function totalPrice() {
+    var length = groceryList.length;
+    for (var i = 0; i < length; i++) {
+        total += groceryList[2];
+        var storedPrice = "<li>" + total + "</li>";
+        document.getElementById('totalListPrice').innerHTML += showTotal;
+    }
+}
+
+
 //this is where I will build information for building my view
 
 
 //adding item
 
 
-function createStoredList(groceryItem){
-    
+function createStoredList(groceryItem) {
+
     var storedDescription = "<li>" + groceryItem.description + "</li>";
     document.getElementById('itemDescriptionList').innerHTML += storedDescription;
-    
+
     var storedQuantity = "<li>" + groceryItem.quantity + "</li>";
     document.getElementById('itemQuantityList').innerHTML += storedQuantity;
-    
+
     var storedPrice = "<li>" + groceryItem.price + "</li>";
     document.getElementById('itemPriceList').innerHTML += storedPrice;
-    
+
 }
 
 function createList() {
-    
+
     console.log()
 
     //add item
@@ -78,6 +88,6 @@ function createList() {
     console.log(newItem);
 }
 
-    document.getElementById('addNew').addEventListener('touchend', function(){
-        createList();
-    }) 
+document.getElementById('addNew').addEventListener('touchend', function () {
+    createList();
+})
